@@ -30,6 +30,11 @@ body {
     font-family: Quicksand, sans-serif;
 }
 
+.night_theme {
+    background: linear-gradient(0deg, #0C1445 80%, #f6eed5 100%);
+    color: white;
+}
+
 .container {
     max-width: 1416px;
     min-width: 355px;
