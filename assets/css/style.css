@@ -25,9 +25,13 @@
 }
 
 body {
-    background: linear-gradient(0deg, #16AFF0 30%, #FFDE83 100%);
+    background: linear-gradient(303deg, #16AFF0 30%, #FFDE83 100%);
     min-height: 100vh;
     font-family: Quicksand, sans-serif;
+}
+
+a {
+    text-decoration: none;
 }
 
 .night_theme {
@@ -48,6 +52,17 @@ body {
 
 .header {
     padding: 20px 0;
+}
+
+.logo {
+    display: contents;
+    color: white;
+    font-size: 35px;
+    letter-spacing: -2px;
+}
+
+.logo__img {
+    width: 31px;
 }
 
 .weather {
