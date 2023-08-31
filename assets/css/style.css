@@ -15,3 +15,35 @@ body {
     margin: 0 auto;
     padding: 0 20px;
 }
+
+.weather__box {
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 36px 16px;
+}
+
+.weather__search {
+    height: 47px;
+    width: 100%;
+    padding: 13px 42px 13px 18px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-color: transparent;
+    border-radius: 15px;
+}
+
+.search__label {
+    position: relative;
+}
+
+.search__button {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 18px;
+    top: -2px;
+    cursor: pointer;
+}
+
