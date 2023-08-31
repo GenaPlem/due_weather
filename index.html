@@ -11,11 +11,12 @@
 </head>
 <body>
     <div class="container">
-        <header>
+        <header class="header">
             <a href="index.html"><img src="assets/images/logo.png" alt="logo"></a>
         </header>
         <main>
-            <div class="weather__box">
+            <h1 class="hidden_heading">Weather Forecast App</h1>
+            <div class="weather">
                 <label for="search" class="search__label">
                     <input class="weather__search" type="text" name="search" id="search">
                     <button type="button" class="search__button">
@@ -27,6 +28,11 @@
                         </lord-icon>
                     </button>
                 </label>
+                <div class="weather__current-day">
+                    <h2>Dublin</h2>
+                    <img src="" alt=""><p>20C</p>
+                    <p>H: 25C</p><p>L: 18C</p>
+                </div>
             </div>
         </main>
     </div>
