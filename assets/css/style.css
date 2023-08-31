@@ -41,7 +41,7 @@ a {
 
 .container {
     max-width: 1416px;
-    min-width: 355px;
+    min-width: 320px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -78,12 +78,29 @@ a {
 
 .weather__search {
     height: 47px;
-    width: 100%;
+    width: calc(100% - 57px);
     padding: 13px 42px 13px 18px;
     background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
     border-color: transparent;
     border-radius: 15px;
+}
+
+.weather__location {
+    width: 47px;
+    height: 47px;
+    padding: 14px;
+    border-radius: 15px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+    float: right;
+    cursor: pointer;
+}
+
+.weather__location:active,
+.weather__search:focus {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .search__label {
