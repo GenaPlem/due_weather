@@ -1,3 +1,23 @@
+@font-face {
+    font-family: "Quicksand";
+    src: url('../fonts/quicksand/static/quicksand_bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Quicksand";
+    src: url('../fonts/quicksand/static/quicksand_semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Quicksand";
+    src: url('../fonts/quicksand/static/quicksand_regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +27,7 @@
 body {
     background: linear-gradient(180deg, #16AFF0 0%, rgba(22, 175, 240, 0.11) 100%);
     min-height: 100vh;
-
+    font-family: Quicksand, sans-serif;
 }
 
 .container {
@@ -57,9 +77,42 @@ body {
     cursor: pointer;
 }
 
-.weather__current-day {
+.weather__current {
     margin: 28px 0;
     padding: 15px;
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.3);
+}
+
+.weather__current__name {
+    font-weight: normal;
+    text-align: center;
+    font-size: 50px;
+}
+
+.weather__current__actual {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.weather__current__temp {
+    font-size: 60px;
+    font-weight: bold;
+    color: white;
+    position: relative;
+}
+
+.weather__current__temp::after {
+    content: 'c';
+    font-size: 20px;
+    position: absolute;
+    right: -5px;
+    top: 5px;
+}
+
+.weather__current__day {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
 }
