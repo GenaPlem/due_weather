@@ -92,3 +92,4 @@ const renderCurrentWeather = (name, temp, condition, icon) => {
             </div>`
 }
 
+searchBtn.addEventListener('click', getCurrentWeather);
