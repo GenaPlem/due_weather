@@ -28,7 +28,9 @@ const getCurrentWeather = () => {
         throw error;
     }
 }
-
+/**
+ * Function helper to start loading from fetch request
+ */
 const startLoading = () => {
     main.style.opacity = '0.3';
     locationBtn.disabled = true;
@@ -36,6 +38,9 @@ const startLoading = () => {
     searchBtn.disabled = true;
 }
 
+/**
+ * Function helper to stop loading from fetch request
+ */
 const stopLoading = () => {
     main.style.opacity = '1';
     locationBtn.disabled = false;
@@ -175,5 +180,6 @@ locationBtn.addEventListener('click', () => {
         })
     } else {
         alert('You didn`t accept the confirm')
+        stopLoading();
     }
 })
