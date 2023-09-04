@@ -1,10 +1,12 @@
 const searchInput = document.getElementById('search');
 const searchBtn = document.getElementById('search_btn');
 const mainContent = document.getElementById('main_content');
+const error = document.getElementById('error');
 
 const getCurrentWeather = () => {
     let location = searchInput.value;
     if (location === '' || location.length < 3) {
+        error.style.display = 'inline-block'
         return
     }
     try {
@@ -13,25 +15,44 @@ const getCurrentWeather = () => {
             .then(res => res.json())
             .then(res => {
                 console.log(res)
-                const {location:{name}, current:{temp_c, condition:{text, icon}}} = res
-                mainContent.innerHTML = renderCurrentWeather(name, temp_c, text, icon)
+                const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
+                mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
+                error.style.display = 'none'
             })
     } catch (error) {
         mainContent.innerHTML = `<div class="error">Error: ${error.message}</div>`;
         throw error;
     }
 }
+/**
+ *
+ * @param date
+ * @returns {*}
+ */
+const splitDate = (date) => date.split(' ')[1];
 
-const convertTemp = (temp) => Math.trunc(temp);
-
-const renderCurrentWeather = (name, temp, condition, icon) => {
+/**
+ * Function to rounding all decimals to integer
+ * @param decimal
+ * @returns {number}
+ */
+const decimalRound = (decimal) => Math.round(decimal);
+/**
+ * Function to render data about weather from fetch request
+ * param: weather data
+ * @returns rendered html
+ */
+const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, condition, icon, sunrise, sunset, hours) => {
+    console.log(hours)
+    let filteredHours = hours.filter(({time_epoch}) => time_epoch.toString().endsWith('600'))
+    console.log(filteredHours)
 
     return `<h2 class="hidden_heading">Current day weather</h2>
             <div class="current">
                 <h2 class="current__name">${name}</h2>
                 <div class="current__actual">
                     <img class="current__icon" src="${icon}" alt="">
-                    <span class="current__temp">${convertTemp(temp)}</span>
+                    <span class="current__temp">${decimalRound(temp)}</span>
                 </div>
                 <div class="current__day">
                     <p>${condition}</p>
@@ -39,24 +60,29 @@ const renderCurrentWeather = (name, temp, condition, icon) => {
             </div>
             <div class="hourly">
                 <div class="hour">
-                    <p class="hour__time">09:00</p>
+                    <p class="hour__time">${splitDate(filteredHours[0].time)}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                    <p>${decimalRound(filteredHours[0].temp_c)}C</p>
                 </div>
                 <div class="hour">
-                    <p class="hour__time">10:00</p>
+                    <p class="hour__time">${splitDate(filteredHours[1].time)}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                    <p>${decimalRound(filteredHours[1].temp_c)}C</p>
                 </div>
                 <div class="hour">
-                    <p class="hour__time">11:00</p>
+                    <p class="hour__time">${splitDate(filteredHours[2].time)}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                    <p>${decimalRound(filteredHours[2].temp_c)}C</p>
                 </div>
                 <div class="hour">
-                    <p class="hour__time">12:00</p>
+                    <p class="hour__time">${splitDate(filteredHours[3].time)}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                    <p>${decimalRound(filteredHours[3].temp_c)}C</p>
                 </div>
                 <div class="hour">
-                    <p class="hour__time">13:00</p>
+                    <p class="hour__time">${splitDate(filteredHours[4].time)}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                    <p>${decimalRound(filteredHours[4].temp_c)}C</p>
                 </div>
             </div>
             <div class="details__wrapper">
@@ -65,28 +91,28 @@ const renderCurrentWeather = (name, temp, condition, icon) => {
                     <h3 class="details__name">Wind</h3>
                     <div class="details__box">
                         <img class="details__icon" src="assets/images/weather_clouds_black.svg" alt="">
-                        <p>25mph/s</p>
+                        <p>${wind_dir}, ${decimalRound(wind_kph)}km/h</p>
                     </div>
                 </div>
                 <div class="details">
                     <h3 class="details__name">Sunrise</h3>
                     <div class="details__box">
                         <img class="details__icon" src="assets/images/weather_clouds_black.svg" alt="">
-                        <p>06:21</p>
+                        <p>${sunrise}</p>
                     </div>
                 </div>
                 <div class="details">
                     <h3 class="details__name">Humidity</h3>
                     <div class="details__box">
                         <img class="details__icon" src="assets/images/weather_clouds_black.svg" alt="">
-                        <p>50%</p>
+                        <p>${humidity}%</p>
                     </div>
                 </div>
                 <div class="details">
                     <h3 class="details__name">Sunset</h3>
                     <div class="details__box">
                         <img class="details__icon" src="assets/images/weather_clouds_black.svg" alt="">
-                        <p>21:40</p>
+                        <p>${sunset}</p>
                     </div>
                 </div>
             </div>`
