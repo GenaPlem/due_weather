@@ -12,13 +12,13 @@ const getCurrentWeather = () => {
         return
     }
     try {
-        main.style.opacity = 0.3;
+        startLoading();
         fetch(`http://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${location}&days=3&aqi=no&alerts=no
 `)
             .then(res => res.json())
             .then(res => {
                 console.log(res)
-                main.style.opacity = 1;
+                stopLoading()
                 const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
                 mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
                 error.style.display = 'none'
@@ -27,6 +27,20 @@ const getCurrentWeather = () => {
         mainContent.innerHTML = `<div class="error">Error: ${error.message}</div>`;
         throw error;
     }
+}
+
+const startLoading = () => {
+    main.style.opacity = '0.3';
+    locationBtn.disabled = true;
+    searchInput.disabled = true;
+    searchBtn.disabled = true;
+}
+
+const stopLoading = () => {
+    main.style.opacity = '1';
+    locationBtn.disabled = false;
+    searchInput.disabled = false;
+    searchBtn.disabled = false;
 }
 /**
  * Function helper to convert date string to time
@@ -139,9 +153,7 @@ searchInput.addEventListener('keypress', (e) => {
  * Listener for render current weather by actual location
  */
 locationBtn.addEventListener('click', () => {
-    main.style.opacity = 0.3;
-    locationBtn.disabled = true;
-    // locationBtn.style.opacity = 0.5;
+    startLoading();
 
     if (confirm('We would like to get your current location. Do you agree with it?')) {
         navigator.geolocation.getCurrentPosition(position => {
@@ -154,9 +166,7 @@ locationBtn.addEventListener('click', () => {
 `)
                 .then(res => res.json())
                 .then(res => {
-                    main.style.opacity = 1;
-                    locationBtn.disabled = false;
-                    // locationBtn.style.opacity = 1;
+                    stopLoading();
 
                     const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
                     mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
