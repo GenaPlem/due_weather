@@ -119,11 +119,15 @@ a {
 
 .error {
     display: none;
-    background-color: red;
     padding: 0.5rem;
-    font-size: 0.7rem;
     margin: 10px 0;
+    color: red;
+    font-size: 0.7rem;
+    font-weight: 700;
     border-radius: 15px;
+    position: absolute;
+    left: 30px;
+    top: 50px;
 }
 
 .current {
