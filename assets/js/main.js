@@ -167,7 +167,7 @@ locationBtn.addEventListener('click', () => {
             const lon = position.coords.longitude;
             console.log(lat, lon)
 
-            fetch(`http://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${lat},${lon}&days=3&aqi=no&alerts=no
+            fetch(`https://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${lat},${lon}&days=3&aqi=no&alerts=no
 `)
                 .then(res => res.json())
                 .then(res => {
