@@ -25,14 +25,14 @@ const getCurrentWeather = () => {
     }
 }
 /**
- *
+ * Function helper to convert date string to time
  * @param date
  * @returns {*}
  */
 const splitDate = (date) => date.split(' ')[1];
 
 /**
- * Function to rounding all decimals to integer
+ * Function helper to rounding all decimals to integer
  * @param decimal
  * @returns {number}
  */
@@ -62,27 +62,27 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
                 <div class="hour">
                     <p class="hour__time">${splitDate(filteredHours[0].time)}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
-                    <p>${decimalRound(filteredHours[0].temp_c)}C</p>
+                    <p>${decimalRound(filteredHours[0].temp_c)}℃</p>
                 </div>
                 <div class="hour">
                     <p class="hour__time">${splitDate(filteredHours[1].time)}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
-                    <p>${decimalRound(filteredHours[1].temp_c)}C</p>
+                    <p>${decimalRound(filteredHours[1].temp_c)}℃</p>
                 </div>
                 <div class="hour">
                     <p class="hour__time">${splitDate(filteredHours[2].time)}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
-                    <p>${decimalRound(filteredHours[2].temp_c)}C</p>
+                    <p>${decimalRound(filteredHours[2].temp_c)}℃</p>
                 </div>
                 <div class="hour">
                     <p class="hour__time">${splitDate(filteredHours[3].time)}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
-                    <p>${decimalRound(filteredHours[3].temp_c)}C</p>
+                    <p>${decimalRound(filteredHours[3].temp_c)}℃</p>
                 </div>
                 <div class="hour">
                     <p class="hour__time">${splitDate(filteredHours[4].time)}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
-                    <p>${decimalRound(filteredHours[4].temp_c)}C</p>
+                    <p>${decimalRound(filteredHours[4].temp_c)}℃</p>
                 </div>
             </div>
             <div class="details__wrapper">
@@ -117,5 +117,16 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
                 </div>
             </div>`
 }
-
+/**
+ * Listener event for search button by click
+ */
 searchBtn.addEventListener('click', getCurrentWeather);
+
+/**
+ * Listener event for search input by enter keypress
+ */
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        getCurrentWeather()
+    }
+})
