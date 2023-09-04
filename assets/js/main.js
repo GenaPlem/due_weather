@@ -1,6 +1,7 @@
 const searchInput = document.getElementById('search');
 const searchBtn = document.getElementById('search_btn');
 const mainContent = document.getElementById('main_content');
+const locationBtn = document.getElementById('location');
 const error = document.getElementById('error');
 
 const getCurrentWeather = () => {
@@ -129,4 +130,21 @@ searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         getCurrentWeather()
     }
+})
+
+locationBtn.addEventListener('click', () => {
+    navigator.geolocation.getCurrentPosition(position => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        fetch(`http://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${lat},${lon}&days=3&aqi=no&alerts=no
+`)
+            .then(res => res.json())
+            .then(res => {
+                const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
+                mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
+                error.style.display = 'none'
+            })
+    })
+
 })
