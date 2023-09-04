@@ -13,7 +13,7 @@ const getCurrentWeather = () => {
     }
     try {
         startLoading();
-        fetch(`http://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${location}&days=3&aqi=no&alerts=no
+        fetch(`https://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${location}&days=3&aqi=no&alerts=no
 `)
             .then(res => res.json())
             .then(res => {
