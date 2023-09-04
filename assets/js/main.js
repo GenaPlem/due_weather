@@ -1,6 +1,7 @@
 const searchInput = document.getElementById('search');
 const searchBtn = document.getElementById('search_btn');
 const mainContent = document.getElementById('main_content');
+const main = document.getElementById('main');
 const locationBtn = document.getElementById('location');
 const error = document.getElementById('error');
 
@@ -11,11 +12,13 @@ const getCurrentWeather = () => {
         return
     }
     try {
+        main.style.opacity = 0.3;
         fetch(`http://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${location}&days=3&aqi=no&alerts=no
 `)
             .then(res => res.json())
             .then(res => {
                 console.log(res)
+                main.style.opacity = 1;
                 const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
                 mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
                 error.style.display = 'none'
@@ -132,19 +135,35 @@ searchInput.addEventListener('keypress', (e) => {
     }
 })
 
+/**
+ * Listener for render current weather by actual location
+ */
 locationBtn.addEventListener('click', () => {
-    navigator.geolocation.getCurrentPosition(position => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
+    main.style.opacity = 0.3;
+    locationBtn.disabled = true;
+    // locationBtn.style.opacity = 0.5;
 
-        fetch(`http://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${lat},${lon}&days=3&aqi=no&alerts=no
+    if (confirm('We would like to get your current location. Do you agree with it?')) {
+        navigator.geolocation.getCurrentPosition(position => {
+
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            console.log(lat, lon)
+
+            fetch(`http://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${lat},${lon}&days=3&aqi=no&alerts=no
 `)
-            .then(res => res.json())
-            .then(res => {
-                const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
-                mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
-                error.style.display = 'none'
-            })
-    })
+                .then(res => res.json())
+                .then(res => {
+                    main.style.opacity = 1;
+                    locationBtn.disabled = false;
+                    // locationBtn.style.opacity = 1;
 
+                    const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
+                    mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
+                    error.style.display = 'none'
+                })
+        })
+    } else {
+        alert('You didn`t accept the confirm')
+    }
 })
