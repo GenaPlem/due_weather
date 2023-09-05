@@ -20,6 +20,7 @@ const getCurrentWeather = () => {
                 console.log(res)
                 stopLoading()
                 const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
+
                 mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
                 error.style.display = 'none'
             })
@@ -47,6 +48,45 @@ const stopLoading = () => {
     searchInput.disabled = false;
     searchBtn.disabled = false;
 }
+
+/**
+ * Function to filter array of 24 hours data to array with only 5 hours
+ * @param hours
+ * @returns {*[]}
+ */
+const filterHours = (hours) => {
+
+    const filteredHours = [];
+
+    for (let i = 0; i < hours.length; i++) {
+
+        switch (hours[i].time.split(' ')[1]) {
+            case '09:00': {
+                filteredHours.push(hours[i]);
+                break;
+            }
+            case '12:00': {
+                filteredHours.push(hours[i]);
+                break;
+            }
+            case '15:00': {
+                filteredHours.push(hours[i]);
+                break;
+            }
+            case '18:00': {
+                filteredHours.push(hours[i]);
+                break;
+            }
+            case '21:00': {
+                filteredHours.push(hours[i]);
+                break;
+            }
+        }
+    }
+
+    return filteredHours
+}
+
 /**
  * Function helper to convert date string to time
  * @param date
@@ -67,7 +107,7 @@ const decimalRound = (decimal) => Math.round(decimal);
  */
 const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, condition, icon, sunrise, sunset, hours) => {
     console.log(hours)
-    let filteredHours = hours.filter(({time_epoch}) => time_epoch.toString().endsWith('600'))
+    let filteredHours = filterHours(hours)
     console.log(filteredHours)
 
     return `<h2 class="hidden_heading">Current day weather</h2>
