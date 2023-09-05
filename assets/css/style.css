@@ -226,6 +226,10 @@ a {
     margin: 20px 0;
 }
 
+.details__wind {
+    float: right;
+}
+
 .footer {
     height: 80px;
     /*position: relative;*/
