@@ -168,9 +168,10 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
                 <h2 class="hidden_heading">Current weather details</h2>
                 <div class="details">
                     <h3 class="details__name">Wind</h3>
+                    <span>${wind_dir}</span>
                     <div class="details__box">
                         <img class="details__icon" src="assets/images/weather_clouds_black.svg" alt="">
-                        <p>${wind_dir}, ${decimalRound(wind_kph)}km/h</p>
+                        <p>${decimalRound(wind_kph)}km/h</p>
                     </div>
                 </div>
                 <div class="details">

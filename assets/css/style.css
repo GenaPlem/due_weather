@@ -213,6 +213,7 @@ a {
 .details__name {
     font-size: 14px;
     font-weight: 600;
+    display: contents;
 }
 
 .details__icon {
@@ -251,6 +252,10 @@ a {
 .navigation__link a {
     color: white;
 }
+
+/*.navigation__link a:hover {*/
+/*    */
+/*}*/
 
 .active a {
     color: black;
