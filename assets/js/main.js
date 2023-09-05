@@ -127,7 +127,7 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
     console.log(filteredHours)
 
     return `<h2 class="hidden_heading">Current day weather</h2>
-            <div class="current">
+            <div class="current glassmorphism">
                 <h2 class="current__name">${name}</h2>
                 <div class="current__actual">
                     <img class="current__icon" src="${icon}" alt="">
@@ -137,7 +137,7 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
                     <p>${condition}</p>
                 </div>
             </div>
-            <div class="hourly">
+            <div class="hourly glassmorphism">
                 <div class="hour">
                     <p class="hour__time">${convertTime(splitDate(filteredHours[0].time))}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
@@ -166,7 +166,7 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
             </div>
             <div class="details__wrapper">
                 <h2 class="hidden_heading">Current weather details</h2>
-                <div class="details">
+                <div class="details glassmorphism">
                     <h3 class="details__name">Wind</h3>
                     <span class="details__wind">${wind_dir}</span>
                     <div class="details__box">
@@ -174,21 +174,21 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
                         <p>${decimalRound(wind_kph)}km/h</p>
                     </div>
                 </div>
-                <div class="details">
+                <div class="details glassmorphism">
                     <h3 class="details__name">Sunrise</h3>
                     <div class="details__box">
                         <img class="details__icon" src="assets/images/weather_clouds_black.svg" alt="">
                         <p>${sunrise}</p>
                     </div>
                 </div>
-                <div class="details">
+                <div class="details glassmorphism">
                     <h3 class="details__name">Humidity</h3>
                     <div class="details__box">
                         <img class="details__icon" src="assets/images/weather_clouds_black.svg" alt="">
                         <p>${humidity}%</p>
                     </div>
                 </div>
-                <div class="details">
+                <div class="details glassmorphism">
                     <h3 class="details__name">Sunset</h3>
                     <div class="details__box">
                         <img class="details__icon" src="assets/images/weather_clouds_black.svg" alt="">
