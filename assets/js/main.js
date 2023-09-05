@@ -95,6 +95,22 @@ const filterHours = (hours) => {
 const splitDate = (date) => date.split(' ')[1];
 
 /**
+ * Function helper to convert 24h format to AM/PM
+ * @param time
+ * @returns string
+ */
+const convertTime = (time) => {
+
+    const [hours] = time.split(':');
+
+    if (hours <= 12) {
+        return `${hours} AM`
+    } else {
+        return `0${hours - 12} PM`
+    }
+}
+
+/**
  * Function helper to rounding all decimals to integer
  * @param decimal
  * @returns {number}
@@ -123,27 +139,27 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
             </div>
             <div class="hourly">
                 <div class="hour">
-                    <p class="hour__time">${splitDate(filteredHours[0].time)}</p>
+                    <p class="hour__time">${convertTime(splitDate(filteredHours[0].time))}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
                     <p>${decimalRound(filteredHours[0].temp_c)}℃</p>
                 </div>
                 <div class="hour">
-                    <p class="hour__time">${splitDate(filteredHours[1].time)}</p>
+                    <p class="hour__time">${convertTime(splitDate(filteredHours[1].time))}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
                     <p>${decimalRound(filteredHours[1].temp_c)}℃</p>
                 </div>
                 <div class="hour">
-                    <p class="hour__time">${splitDate(filteredHours[2].time)}</p>
+                    <p class="hour__time">${convertTime(splitDate(filteredHours[2].time))}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
                     <p>${decimalRound(filteredHours[2].temp_c)}℃</p>
                 </div>
                 <div class="hour">
-                    <p class="hour__time">${splitDate(filteredHours[3].time)}</p>
+                    <p class="hour__time">${convertTime(splitDate(filteredHours[3].time))}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
                     <p>${decimalRound(filteredHours[3].temp_c)}℃</p>
                 </div>
                 <div class="hour">
-                    <p class="hour__time">${splitDate(filteredHours[4].time)}</p>
+                    <p class="hour__time">${convertTime(splitDate(filteredHours[4].time))}</p>
                     <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
                     <p>${decimalRound(filteredHours[4].temp_c)}℃</p>
                 </div>
