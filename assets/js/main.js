@@ -5,6 +5,10 @@ const main = document.getElementById('main');
 const locationBtn = document.getElementById('location');
 const error = document.getElementById('error');
 
+/**
+ * Function to get weather from the API response by input value or a location that passed in params
+ * @param defaultLocation
+ */
 const getCurrentWeather = (defaultLocation) => {
     let location = defaultLocation || searchInput.value;
 
@@ -31,6 +35,7 @@ const getCurrentWeather = (defaultLocation) => {
         throw error;
     }
 }
+
 /**
  * Function helper to start loading from fetch request
  */
@@ -118,6 +123,7 @@ const convertTime = (time) => {
  * @returns {number}
  */
 const decimalRound = (decimal) => Math.round(decimal);
+
 /**
  * Function to render data about weather from fetch request
  * param: weather data
@@ -200,6 +206,10 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
             </div>`
 }
 
+/**
+ * Function to save location name into local storage
+ * @param locationName
+ */
 const storageLocation = (locationName) => {
 
     if (locationName.length < 3) {
@@ -207,6 +217,7 @@ const storageLocation = (locationName) => {
     }
     localStorage.setItem('location', locationName)
 }
+
 /**
  * Listener event for search button by click
  */
