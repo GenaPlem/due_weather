@@ -84,8 +84,6 @@ a {
     height: 47px;
     width: calc(100% - 57px);
     padding: 13px 42px 13px 18px;
-    /*background-color: rgba(255, 255, 255, 0.3);*/
-    /*box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);*/
     border: none;
     border-radius: 15px;
 }
@@ -96,8 +94,6 @@ a {
     padding: 14px;
     border-radius: 15px;
     border: none;
-    /*background-color: rgba(255, 255, 255, 0.3);*/
-    /*box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);*/
     float: right;
     cursor: pointer;
 }
@@ -137,8 +133,6 @@ a {
     margin: 28px 0 10px;
     padding: 15px;
     border-radius: 15px;
-    /*background-color: rgba(255, 255, 255, 0.3);*/
-    /*box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);*/
 }
 
 .current__name {
@@ -177,8 +171,6 @@ a {
     border-radius: 15px;
     display: flex;
     justify-content: space-evenly;
-    /*background-color: rgba(255, 255, 255, 0.3);*/
-    /*box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);*/
 }
 
 .hour {
@@ -208,8 +200,6 @@ a {
 .details {
     padding: 15px;
     border-radius: 15px;
-    /*background-color: rgba(255, 255, 255, 0.3);*/
-    /*box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);*/
     width: calc(50% - 10px);
 }
 
