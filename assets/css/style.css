@@ -277,3 +277,13 @@ a {
     margin-block: 20px;
     font-size: 40px;
 }
+
+.forecast__day {
+    padding: 15px;
+    margin-block: 15px;
+    border-radius: 15px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template: 1fr 1fr/ 1fr 1fr;
+}

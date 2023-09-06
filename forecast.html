@@ -16,9 +16,9 @@
         </header>
         <main class="main">
             <h1 class="hidden_heading">Weather Forecast App</h1>
-            <div class="weather">
+            <div class="weather glassmorphism">
                 <label for="search" class="search__label">
-                    <input class="weather__search" type="text" name="search" id="search" placeholder="Search your location">
+                    <input class="weather__search glassmorphism" type="text" name="search" id="search" placeholder="Search your location">
                     <button type="button" class="search__button" id="search_btn" aria-label="button for search weather by location">
                         <lord-icon
                                 src="https://cdn.lordicon.com/xfftupfv.json"
@@ -28,14 +28,36 @@
                         </lord-icon>
                     </button>
                 </label>
-                <button class="weather__location" type="button" id="location" title="Use your current location">
+                <button class="weather__location glassmorphism" type="button" id="location" title="Use your current location">
                     <img src="assets/images/location-arrow-solid.svg" alt="location arrow">
                 </button>
                 <div class="error" id="error">At least 3 symbol</div>
                 <section id="main_content">
                     <h2 class="hidden_heading">Forecast weather</h2>
+                    <h3 class="forecast__name">Dublin</h3>
                     <div class="forecast">
-
+                        <div class="forecast__day glassmorphism">
+                            <img class="forecast__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                            <span class="forecast__date">09.02</span>
+                            <p class="forecast__weather">Sunny</p>
+                            <span class="forecast__temp">H: 25C  L: 18C</span>
+                        </div>
+                    </div>
+                    <div class="forecast">
+                        <div class="forecast__day glassmorphism">
+                            <img class="forecast__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                            <span class="forecast__date">09.02</span>
+                            <p class="forecast__weather">Sunny</p>
+                            <span class="forecast__temp">H: 25C  L: 18C</span>
+                        </div>
+                    </div>
+                    <div class="forecast">
+                        <div class="forecast__day glassmorphism">
+                            <img class="forecast__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                            <span class="forecast__date">09.02</span>
+                            <p class="forecast__weather">Sunny</p>
+                            <span class="forecast__temp">H: 25C  L: 18C</span>
+                        </div>
                     </div>
                 </section>
             </div>
