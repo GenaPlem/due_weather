@@ -6,7 +6,7 @@ const locationBtn = document.getElementById('location');
 const error = document.getElementById('error');
 
 const getCurrentWeather = () => {
-    let location = searchInput.value;
+    let location = searchInput.value || 'Dublin';
     if (location === '' || location.length < 3) {
         error.style.display = 'inline-block'
         return
@@ -240,3 +240,8 @@ locationBtn.addEventListener('click', () => {
         stopLoading();
     }
 })
+
+/**
+ * Listener for DOMContentLoaded to get real data when the page is load
+ */
+document.addEventListener('DOMContentLoaded', getCurrentWeather);
