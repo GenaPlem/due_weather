@@ -5,12 +5,14 @@ const main = document.getElementById('main');
 const locationBtn = document.getElementById('location');
 const error = document.getElementById('error');
 
-const getCurrentWeather = () => {
-    let location = searchInput.value || 'Dublin';
-    if (location === '' || location.length < 3) {
+const getCurrentWeather = (defaultLocation) => {
+    let location = defaultLocation || searchInput.value;
+
+    if (location.length < 3) {
         error.style.display = 'inline-block'
         return
     }
+
     try {
         startLoading();
         fetch(`https://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${location}&days=3&aqi=no&alerts=no
@@ -200,7 +202,9 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
 /**
  * Listener event for search button by click
  */
-searchBtn.addEventListener('click', getCurrentWeather);
+searchBtn.addEventListener('click', () => {
+    getCurrentWeather()
+});
 
 /**
  * Listener event for search input by enter keypress
@@ -234,6 +238,9 @@ locationBtn.addEventListener('click', () => {
                     mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
                     error.style.display = 'none'
                 })
+        }, () => {
+            alert('Your browser doesn`t support geolocation')
+            stopLoading();
         })
     } else {
         alert('You didn`t accept the confirm')
@@ -244,4 +251,7 @@ locationBtn.addEventListener('click', () => {
 /**
  * Listener for DOMContentLoaded to get real data when the page is load
  */
-document.addEventListener('DOMContentLoaded', getCurrentWeather);
+document.addEventListener('DOMContentLoaded', () => {
+
+    getCurrentWeather('Dublin')
+});
