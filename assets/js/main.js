@@ -227,7 +227,6 @@ searchInput.addEventListener('keypress', (e) => {
         getCurrentWeather();
 
         let locationName = e.target.value;
-        console.log(locationName);
 
         storageLocation(locationName);
     }
