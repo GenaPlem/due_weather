@@ -271,6 +271,11 @@ locationBtn.addEventListener('click', () => {
  * Listener for DOMContentLoaded to get real data when the page is load
  */
 document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('location')) {
+        let locationName = localStorage.getItem('location')
 
-    getCurrentWeather('Dublin')
+        getCurrentWeather(locationName)
+    } else {
+        getCurrentWeather('Dublin')
+    }
 });
