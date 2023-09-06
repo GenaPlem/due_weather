@@ -199,11 +199,24 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
                 </div>
             </div>`
 }
+
+const storageLocation = (locationName) => {
+
+    if (locationName.length < 3) {
+        return
+    }
+    localStorage.setItem('location', locationName)
+}
 /**
  * Listener event for search button by click
  */
-searchBtn.addEventListener('click', () => {
+searchBtn.addEventListener('click', (e) => {
+
     getCurrentWeather()
+
+    let locationName = e.target.parentNode.previousSibling.previousElementSibling.value;
+    console.log(locationName)
+    storageLocation(locationName);
 });
 
 /**
@@ -211,7 +224,12 @@ searchBtn.addEventListener('click', () => {
  */
 searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-        getCurrentWeather()
+        getCurrentWeather();
+
+        let locationName = e.target.value;
+        console.log(locationName);
+
+        storageLocation(locationName);
     }
 })
 
@@ -226,7 +244,6 @@ locationBtn.addEventListener('click', () => {
 
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
-            console.log(lat, lon)
 
             fetch(`https://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${lat},${lon}&days=3&aqi=no&alerts=no
 `)
@@ -237,6 +254,8 @@ locationBtn.addEventListener('click', () => {
                     const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
                     mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
                     error.style.display = 'none'
+
+                    storageLocation(name)
                 })
         }, () => {
             alert('Your browser doesn`t support geolocation')
