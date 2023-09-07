@@ -33,12 +33,13 @@ const getCurrentWeather = (defaultLocation) => {
 
                     errorElement.style.display = 'none'
 
-                    responseError.innerText = `Error: ${res.error.message}`;
-                    responseError.style.display = 'inline-block';
-
-                    setTimeout(() => {
-                        responseError.style.display = 'none';
-                    }, 2000)
+                    showError(res.error.message)
+                    // responseError.innerText = `Error: ${res.error.message}`;
+                    // responseError.style.display = 'inline-block';
+                    //
+                    // setTimeout(() => {
+                    //     responseError.style.display = 'none';
+                    // }, 2000)
 
                 } else {
                     stopLoading()
@@ -57,6 +58,15 @@ const getCurrentWeather = (defaultLocation) => {
         responseError.innerText = `Error: ${error.message}`;
         throw error;
     }
+}
+
+const showError = (error) => {
+    responseError.style.display = 'inline-block';
+    responseError.innerText = `Error: ${error}`;
+
+    setTimeout(() => {
+        responseError.style.display = 'none';
+    }, 2000)
 }
 
 /**
@@ -281,12 +291,13 @@ locationBtn.addEventListener('click', () => {
 
                     storageLocation(name)
                 })
-        }, () => {
-            alert('Your browser doesn`t support geolocation')
+        }, (error) => {
+            showError(error.message)
+
             stopLoading();
         })
     } else {
-        alert('You didn`t accept the confirm')
+        showError('User denied confirm')
         stopLoading();
     }
 })
@@ -303,11 +314,3 @@ document.addEventListener('DOMContentLoaded', () => {
         getCurrentWeather('Dublin')
     }
 });
-
-// /**
-//  * Listener
-//  */
-// searchInput.addEventListener('focus', () => {
-//     document.documentElement.style.setProperty('overflow', 'hidden');
-//     document.documentElement.style.setProperty('position', 'fixed');
-// });
