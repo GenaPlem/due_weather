@@ -36,8 +36,7 @@ const renderForecast = (name, forecastday) => {
                 <img class="forecast__icon" src="assets/images/weather_clouds_black.svg" alt="">
                     <span class="forecast__date">${day.date}</span>
                     <p class="forecast__weather">${day.day.condition.text}</p>
-                    <span
-                        class="forecast__temp">H: ${day.day.maxtemp_c}℃  L: ${day.day.mintemp_c}℃</span>
+                    <span class="forecast__temp">H: ${day.day.maxtemp_c}℃  L: ${day.day.mintemp_c}℃</span>
             </div>`
     })
 

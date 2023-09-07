@@ -5,7 +5,6 @@ const main = document.getElementById('main');
 const locationBtn = document.getElementById('location');
 const errorElement = document.getElementById('error');
 const responseError = document.getElementById('response__error');
-
 /**
  * Function to get weather from the API response by input value or a location that passed in params
  * @param defaultLocation
@@ -34,12 +33,6 @@ const getCurrentWeather = (defaultLocation) => {
                     errorElement.style.display = 'none'
 
                     showError(res.error.message)
-                    // responseError.innerText = `Error: ${res.error.message}`;
-                    // responseError.style.display = 'inline-block';
-                    //
-                    // setTimeout(() => {
-                    //     responseError.style.display = 'none';
-                    // }, 2000)
 
                 } else {
                     stopLoading()
@@ -50,8 +43,12 @@ const getCurrentWeather = (defaultLocation) => {
 
                     storageLocation(name);
 
+                    saveLocation();
+
                     errorElement.style.display = 'none'
                     responseError.style.display = 'none';
+
+
                 }
             })
     } catch (error) {
@@ -150,6 +147,25 @@ const convertTime = (time) => {
     }
 }
 
+const saveLocation = () => {
+    let saveBtn = document.getElementById('save_location');
+    let saved = [];
+    if (localStorage.getItem('saved')) {
+        saved = JSON.parse(localStorage.getItem('saved'))
+    }
+
+    saveBtn.addEventListener('click', (e) => {
+        console.log(e.target.nextElementSibling.textContent)
+        let locationName = e.target.nextElementSibling.textContent;
+        if (!saved.includes(locationName)) {
+            saved.push(locationName)
+        } else {
+            showError('This location already saved')
+        }
+        localStorage.setItem('saved', JSON.stringify(saved))
+    });
+}
+
 /**
  * Function helper to rounding all decimals to integer
  * @param decimal
@@ -169,6 +185,7 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
 
     return `<h2 class="hidden_heading">Current day weather</h2>
             <div class="current glassmorphism">
+                <button type="button" class="glassmorphism" id="save_location">+</button>
                 <h2 class="current__name">${name}</h2>
                 <div class="current__actual">
                     <img class="current__icon" src="${icon}" alt="">
@@ -289,7 +306,10 @@ locationBtn.addEventListener('click', () => {
                     mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
                     errorElement.style.display = 'none'
 
-                    storageLocation(name)
+                    storageLocation(name);
+
+                    saveLocation();
+
                 })
         }, (error) => {
             showError(error.message)
@@ -310,6 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let locationName = localStorage.getItem('location')
 
         getCurrentWeather(locationName)
+
     } else {
         getCurrentWeather('Dublin')
     }
