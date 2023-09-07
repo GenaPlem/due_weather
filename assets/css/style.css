@@ -72,6 +72,7 @@ a {
 }
 
 .weather {
+    position: relative;
     max-width: 800px;
     border-radius: 16px;
     padding: 16px;
@@ -138,6 +139,16 @@ a {
     border-radius: 15px;
     background: red;
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.response__error::after {
+    content: '';
+    width: calc(100% - 30px);
+    height: 2px;
+    position: absolute;
+    background: #ffffff9c;
+    left: 15px;
+    bottom: 10px;
 }
 
 .current {
