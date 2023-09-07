@@ -133,15 +133,23 @@ a {
     top: 50px;
 }
 
-.response__error {
+.response__error,
+.success {
     display: none;
     position: absolute;
     top: -65px;
     right: 0;
     padding: 15px;
     border-radius: 15px;
-    background: red;
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.response__error {
+    background: red;
+}
+
+.success {
+    background: lightgreen;
 }
 
 .current {
@@ -186,12 +194,12 @@ a {
     width: 40px;
     height: 40px;
     font-size: 25px;
-    /*padding: 0 7px;*/
     position: absolute;
     top: 10px;
     right: 10px;
     border: none;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .hourly {

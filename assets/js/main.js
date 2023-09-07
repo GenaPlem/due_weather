@@ -5,6 +5,8 @@ const main = document.getElementById('main');
 const locationBtn = document.getElementById('location');
 const errorElement = document.getElementById('error');
 const responseError = document.getElementById('response__error');
+const successMessage = document.getElementById('success');
+
 /**
  * Function to get weather from the API response by input value or a location that passed in params
  * @param defaultLocation
@@ -13,7 +15,7 @@ const getCurrentWeather = (defaultLocation) => {
     let location = defaultLocation || searchInput.value;
 
     if (location.length < 3) {
-        errorElement.style.display = 'inline-block'
+        errorElement.style.display = 'inline-block';
         return
     }
 
@@ -23,40 +25,43 @@ const getCurrentWeather = (defaultLocation) => {
 `)
             .then(res => res.json())
             .then(res => {
-                console.log(res)
+                console.log(res);
                 /*
                     If response object has property error, then error will show up
                  */
                 if (res.hasOwnProperty('error')) {
-                    stopLoading()
+                    stopLoading();
 
-                    errorElement.style.display = 'none'
+                    errorElement.style.display = 'none';
 
-                    showError(res.error.message)
+                    showError(res.error.message);
 
                 } else {
-                    stopLoading()
+                    stopLoading();
 
-                    const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
+                    const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res;
 
-                    mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
+                    mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour);
 
                     storageLocation(name);
 
                     saveLocation();
 
-                    errorElement.style.display = 'none'
+                    errorElement.style.display = 'none';
                     responseError.style.display = 'none';
-
 
                 }
             })
     } catch (error) {
-        responseError.innerText = `Error: ${error.message}`;
+        showError(error.message);
         throw error;
     }
 }
 
+/**
+ * Function to show alert about some error
+ * @param error
+ */
 const showError = (error) => {
     responseError.style.display = 'inline-block';
     responseError.innerText = `Error: ${error}`;
@@ -66,24 +71,40 @@ const showError = (error) => {
     }, 2000)
 }
 
+const showSuccess = (success) => {
+    successMessage.style.display = 'inline-block';
+    successMessage.innerText = `Success: ${success}`;
+
+    setTimeout(() => {
+        successMessage.style.display = 'none';
+    }, 2000)
+}
+
 /**
  * Function helper to start loading from fetch request
  */
 const startLoading = () => {
+    let buttons = document.querySelectorAll('button');
+
+    buttons.forEach(button => {
+        button.disabled = true;
+    })
     main.style.opacity = '0.3';
-    locationBtn.disabled = true;
     searchInput.disabled = true;
-    searchBtn.disabled = true;
 }
 
 /**
  * Function helper to stop loading from fetch request
  */
 const stopLoading = () => {
+    let buttons = document.querySelectorAll('button');
+
+    buttons.forEach(button => {
+        button.disabled = false;
+    })
+
     main.style.opacity = '1';
-    locationBtn.disabled = false;
     searchInput.disabled = false;
-    searchBtn.disabled = false;
 }
 
 /**
@@ -147,22 +168,26 @@ const convertTime = (time) => {
     }
 }
 
+/**
+ * Function to save location to local storage
+ */
 const saveLocation = () => {
     let saveBtn = document.getElementById('save_location');
     let saved = [];
     if (localStorage.getItem('saved')) {
-        saved = JSON.parse(localStorage.getItem('saved'))
+        saved = JSON.parse(localStorage.getItem('saved'));
     }
 
     saveBtn.addEventListener('click', (e) => {
-        console.log(e.target.nextElementSibling.textContent)
+        console.log(e.target.nextElementSibling.textContent);
         let locationName = e.target.nextElementSibling.textContent;
         if (!saved.includes(locationName)) {
-            saved.push(locationName)
+            saved.push(locationName);
+            showSuccess('Your location saved!');
         } else {
-            showError('This location already saved')
+            showError('This location already saved');
         }
-        localStorage.setItem('saved', JSON.stringify(saved))
+        localStorage.setItem('saved', JSON.stringify(saved));
     });
 }
 
@@ -180,7 +205,7 @@ const decimalRound = (decimal) => Math.round(decimal);
  */
 const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, condition, icon, sunrise, sunset, hours) => {
     console.log(hours)
-    let filteredHours = filterHours(hours)
+    let filteredHours = filterHours(hours);
     console.log(filteredHours)
 
     return `<h2 class="hidden_heading">Current day weather</h2>
@@ -265,14 +290,14 @@ const storageLocation = (locationName) => {
     if (locationName.length < 3) {
         return
     }
-    localStorage.setItem('location', locationName)
+    localStorage.setItem('location', locationName);
 }
 
 /**
  * Listener event for search button by click
  */
 searchBtn.addEventListener('click', () => {
-    getCurrentWeather()
+    getCurrentWeather();
 });
 
 /**
@@ -302,9 +327,9 @@ locationBtn.addEventListener('click', () => {
                 .then(res => {
                     stopLoading();
 
-                    const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
-                    mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
-                    errorElement.style.display = 'none'
+                    const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res;
+                    mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour);
+                    errorElement.style.display = 'none';
 
                     storageLocation(name);
 
@@ -312,12 +337,12 @@ locationBtn.addEventListener('click', () => {
 
                 })
         }, (error) => {
-            showError(error.message)
+            showError(error.message);
 
             stopLoading();
         })
     } else {
-        showError('User denied confirm')
+        showError('User denied confirm');
         stopLoading();
     }
 })
@@ -327,11 +352,11 @@ locationBtn.addEventListener('click', () => {
  */
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('location')) {
-        let locationName = localStorage.getItem('location')
+        let locationName = localStorage.getItem('location');
 
-        getCurrentWeather(locationName)
+        getCurrentWeather(locationName);
 
     } else {
-        getCurrentWeather('Dublin')
+        getCurrentWeather('Dublin');
     }
 });
