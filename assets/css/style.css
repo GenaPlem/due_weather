@@ -142,21 +142,6 @@ a {
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
-.response__error p {
-    position: relative;
-}
-
-.response__error p::after {
-    content: '';
-    width: 100%;
-    height: 2px;
-    position: absolute;
-    background: #ffffff9c;
-    left: 0;
-    right: 0;
-    bottom: -5px;
-}
-
 .current {
     margin: 28px 0 10px;
     padding: 15px;

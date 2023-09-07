@@ -277,7 +277,7 @@ locationBtn.addEventListener('click', () => {
 
                     const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
                     mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
-                    error.style.display = 'none'
+                    errorElement.style.display = 'none'
 
                     storageLocation(name)
                 })
@@ -303,3 +303,11 @@ document.addEventListener('DOMContentLoaded', () => {
         getCurrentWeather('Dublin')
     }
 });
+
+// /**
+//  * Listener
+//  */
+// searchInput.addEventListener('focus', () => {
+//     document.documentElement.style.setProperty('overflow', 'hidden');
+//     document.documentElement.style.setProperty('position', 'fixed');
+// });
