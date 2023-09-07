@@ -3,7 +3,8 @@ const searchBtn = document.getElementById('search_btn');
 const mainContent = document.getElementById('main_content');
 const main = document.getElementById('main');
 const locationBtn = document.getElementById('location');
-const error = document.getElementById('error');
+const errorElement = document.getElementById('error');
+const responseError = document.getElementById('response__error');
 
 /**
  * Function to get weather from the API response by input value or a location that passed in params
@@ -13,7 +14,7 @@ const getCurrentWeather = (defaultLocation) => {
     let location = defaultLocation || searchInput.value;
 
     if (location.length < 3) {
-        error.style.display = 'inline-block'
+        errorElement.style.display = 'inline-block'
         return
     }
 
@@ -24,14 +25,36 @@ const getCurrentWeather = (defaultLocation) => {
             .then(res => res.json())
             .then(res => {
                 console.log(res)
-                stopLoading()
-                const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
+                /*
+                    If response object has property error, then error will show up
+                 */
+                if (res.hasOwnProperty('error')) {
+                    stopLoading()
 
-                mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
-                error.style.display = 'none'
+                    errorElement.style.display = 'none'
+
+                    responseError.innerText = `Error: ${res.error.message}`;
+                    responseError.style.display = 'inline-block';
+
+                    setTimeout(() => {
+                        responseError.style.display = 'none';
+                    }, 2000)
+
+                } else {
+                    stopLoading()
+
+                    const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res
+
+                    mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour)
+
+                    storageLocation(name);
+
+                    errorElement.style.display = 'none'
+                    responseError.style.display = 'none';
+                }
             })
     } catch (error) {
-        mainContent.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+        responseError.innerText = `Error: ${error.message}`;
         throw error;
     }
 }
@@ -221,13 +244,8 @@ const storageLocation = (locationName) => {
 /**
  * Listener event for search button by click
  */
-searchBtn.addEventListener('click', (e) => {
-
+searchBtn.addEventListener('click', () => {
     getCurrentWeather()
-
-    let locationName = e.target.parentNode.previousSibling.previousElementSibling.value;
-    console.log(locationName)
-    storageLocation(locationName);
 });
 
 /**
@@ -236,10 +254,6 @@ searchBtn.addEventListener('click', (e) => {
 searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         getCurrentWeather();
-
-        let locationName = e.target.value;
-
-        storageLocation(locationName);
     }
 })
 

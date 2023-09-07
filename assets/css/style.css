@@ -129,6 +129,17 @@ a {
     top: 50px;
 }
 
+.response__error {
+    display: none;
+    position: absolute;
+    top: -65px;
+    right: 0;
+    padding: 15px;
+    border-radius: 15px;
+    background: red;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
 .current {
     margin: 28px 0 10px;
     padding: 15px;
