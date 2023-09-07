@@ -69,7 +69,7 @@ const renderSaved = () => {
         })
     } else {
         html += `<div class="saved glassmorphism">
-                    <h2>You still havent saved location</h2>
+                    <h2 class="saved__name">You still haven't saved any locations</h2>
                  </div>`
     }
 

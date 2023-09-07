@@ -74,12 +74,9 @@ a {
 .weather {
     position: relative;
     max-width: 800px;
-    min-height: 300px;
     border-radius: 16px;
     padding: 16px;
     margin: 0 auto 20px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
 }
 
 .weather__search {
@@ -103,7 +100,8 @@ a {
 
 .weather__location:active,
 .weather__search:focus,
-#save_location:active {
+#save_location:active,
+.delete_location {
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -197,6 +195,7 @@ a {
     position: absolute;
     top: 10px;
     right: 10px;
+    color: black;
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -295,8 +294,8 @@ a {
     color: black;
 }
 
-.forecast {
-
+.forecast__weather {
+    text-align: center;
 }
 
 .forecast__name {
@@ -326,5 +325,5 @@ a {
     text-align: center;
 }
 
-.saved__temp {
-}
+/*.saved__temp {*/
+/*}*/
