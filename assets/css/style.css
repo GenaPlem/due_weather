@@ -74,6 +74,7 @@ a {
 .weather {
     position: relative;
     max-width: 800px;
+    min-height: 300px;
     border-radius: 16px;
     padding: 16px;
     margin: 0 auto 20px;
@@ -101,7 +102,8 @@ a {
 }
 
 .weather__location:active,
-.weather__search:focus {
+.weather__search:focus,
+#save_location:active {
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -146,6 +148,7 @@ a {
     margin: 28px 0 10px;
     padding: 15px;
     border-radius: 15px;
+    position: relative;
 }
 
 .current__name {
@@ -176,6 +179,16 @@ a {
 .current__day {
     margin-top: 10px;
     text-align: center;
+}
+
+#save_location {
+    font-size: 25px;
+    padding: 0 7px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    border-radius: 50%;
 }
 
 .hourly {
@@ -289,4 +302,17 @@ a {
     align-items: center;
     justify-items: center;
     grid-template: 1fr 1fr/ 1fr 1fr;
+}
+
+.saved {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+
+.saved__name {
+    text-align: center;
+}
+
+.saved__temp {
 }
