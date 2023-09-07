@@ -7,7 +7,7 @@ const getForecast = () => {
 `)
             .then(res => res.json())
             .then(res => {
-                console.log(res)
+                console.log(res);
                 const {location:{name}, forecast:{forecastday}} = res
 
                 mainContent.innerHTML = renderForecast(name, forecastday)
@@ -19,9 +19,30 @@ const getForecast = () => {
     }
 }
 
+/**
+ * Function helper to rounding all decimals to integer
+ * @param decimal
+ * @returns {number}
+ */
+const decimalRound = (decimal) => Math.round(decimal);
+
+/**
+ * Function to convert date from YYYY-MM-DD to DD-`3 symbols MM`
+ * @param date
+ */
+const convertDate = (date) => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const convertedDate = date.split('-');
+    const day = convertedDate[2];
+    const month = months[parseInt(convertedDate[1]) - 1];
+
+    return `${day} ${month}`;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-    getForecast()
-})
+    getForecast();
+});
 
 const renderForecast = (name, forecastday) => {
     let html = `<div class="weather glassmorphism">
@@ -34,9 +55,9 @@ const renderForecast = (name, forecastday) => {
         html += `<div class="forecast">
             <div class="forecast__day glassmorphism">
                 <img class="forecast__icon" src="assets/images/weather_clouds_black.svg" alt="">
-                    <span class="forecast__date">${day.date}</span>
+                    <span class="forecast__date">${convertDate(day.date)}</span>
                     <p class="forecast__weather">${day.day.condition.text}</p>
-                    <span class="forecast__temp">H: ${day.day.maxtemp_c}℃  L: ${day.day.mintemp_c}℃</span>
+                    <span class="forecast__temp">H: ${decimalRound(day.day.maxtemp_c)}℃  L: ${decimalRound(day.day.mintemp_c)}℃</span>
             </div>`
     })
 
