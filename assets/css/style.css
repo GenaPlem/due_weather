@@ -140,9 +140,9 @@ a {
 .response__error,
 .success {
     display: none;
-    position: absolute;
-    top: -65px;
-    right: 0;
+    position: fixed;
+    top: 65px;
+    right: 20px;
     padding: 15px;
     border-radius: 15px;
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
@@ -202,6 +202,8 @@ a {
 #save_location,
 .delete_location {
     content-visibility: hidden;
+    /* Add color transparent to hide text under the button */
+    color: transparent;
     width: 20px;
     height: 25px;
     box-sizing: border-box;
