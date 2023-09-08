@@ -327,7 +327,7 @@ searchInput.addEventListener('keypress', (e) => {
 locationBtn.addEventListener('click', () => {
     startLoading();
 
-    // if (confirm('We would like to get your current location. Do you agree with it?')) {
+    if (confirm('We would like to get your current location. Do you agree with it?')) {
     navigator.geolocation.getCurrentPosition(position => {
 
         const lat = position.coords.latitude;
@@ -353,17 +353,17 @@ locationBtn.addEventListener('click', () => {
                 saveLocation();
             });
     }, (error) => {
-        showError(error.message);
+        showError(`${error.message}.
+        Oops! It looks like your browser
+        doesn't support this feature.`);
 
         stopLoading();
-    });
+    })
+    } else {
+        showError('You are denied confirm');
+        stopLoading();
+    }
 });
-//     } else {
-//         showError('User denied confirm');
-//         stopLoading();
-//     }
-// });
-
 /**
  * Listener for DOMContentLoaded to get real data when the page is load
  */
