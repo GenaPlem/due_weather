@@ -33,9 +33,11 @@ const getSaved = async () => {
                     html += `<div id="${itemId}" class="saved glassmorphism">
                                 <button type="button" class="delete_location"></button>
                                 <h3 class="saved__name">${name}</h3>
-                                <img src="${icon}" alt="${text} icon">
-                                <span class="saved__temp">${temp_c}</span>
-                                <p>${text}</p>
+                                <div class="saved__actual">
+                                    <img class="saved__icon" src="${icon}" alt="${text} icon">
+                                    <p class="saved__temp">${decimalRound(temp_c)}℃</p>
+                                </div>
+                                <p class="saved__condition">${text}</p>
                             </div>`;
                 }
             } catch (error) {
@@ -63,6 +65,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     removeLocation();
 });
+
+/**
+ * Function helper to rounding all decimals to integer
+ * @param decimal
+ * @returns {number}
+ */
+const decimalRound = (decimal) => Math.round(decimal);
 
 /**
  * Function to remove location from saved in local storage by it id

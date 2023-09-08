@@ -53,24 +53,26 @@ document.addEventListener('DOMContentLoaded', () => {
 /**
  * Function to render forecast weather
  * @param name
- * @param forecastday
+ * @param forecastDay
  * @returns {string}
  */
-const renderForecast = (name, forecastday) => {
+const renderForecast = (name, forecastDay) => {
     let html = `<!-- Weather forecast -->
                 <div class="weather glassmorphism">
                     <h2 class="hidden_heading">Forecast weather</h2>
                     <h3 class="forecast__name">${name}</h3>`;
 
-    console.log(forecastday)
+    console.log(forecastDay)
 
-    forecastday.forEach(day => {
+    forecastDay.forEach(day => {
         html += `<div class="forecast">
             <div class="forecast__day glassmorphism">
                 <img class="forecast__icon" src="${day.day.condition.icon}" alt="${day.day.condition.text} icon">
-                    <span class="forecast__date">${convertDate(day.date)}</span>
-                    <p class="forecast__weather">${day.day.condition.text}</p>
-                    <span class="forecast__temp">H: ${decimalRound(day.day.maxtemp_c)}℃  L: ${decimalRound(day.day.mintemp_c)}℃</span>
+                <p class="forecast__date bold">${convertDate(day.date)}</p>
+                <p class="forecast__weather">${day.day.condition.text}</p>
+                <p class="forecast__temp"><span class="bold">H:</span> ${decimalRound(day.day.maxtemp_c)}℃  <span class="bold">L:</span> ${decimalRound(day.day.mintemp_c)}℃</p>
+                <p class="forecast__rain"><span class="bold">Rain Chanse:</span> ${day.day.daily_chance_of_rain}%</p>
+                <div class="forecast__wind"><img src="assets/images/windy.svg" alt="Windy icon" width="25px">${day.day.maxwind_kph} km/h</div>
             </div>`;
     });
 
