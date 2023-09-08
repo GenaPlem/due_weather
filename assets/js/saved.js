@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 const decimalRound = (decimal) => Math.round(decimal);
 
 /**
- * Function to remove location from saved in local storage by it id
+ * Function to remove location from saved in local storage by id
  */
 const removeLocation = () => {
 

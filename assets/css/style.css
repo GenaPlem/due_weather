@@ -1,3 +1,4 @@
+/* Add fonts */
 @font-face {
     font-family: "Quicksand";
     src: url('../fonts/quicksand/static/quicksand_bold.ttf') format('truetype');
@@ -16,8 +17,7 @@
     font-weight: normal;
     font-style: normal;
 }
-
-
+/* Reset all default margins and paddings */
 * {
     margin: 0;
     padding: 0;
@@ -25,6 +25,7 @@
 }
 
 body {
+    /* Add gradient background */
     background: linear-gradient(303deg, #16AFF0 30%, #FFDE83 100%);
     min-height: 100vh;
     font-family: Quicksand, sans-serif;
@@ -33,29 +34,23 @@ body {
 a {
     text-decoration: none;
 }
-
-.night_theme {
-    /*background: linear-gradient(0deg, #0C1445 80%, #f6eed5 100%);*/
-    /*background: linear-gradient(35deg, #0f2a7b 60%, #e8dec1 100%);*/
-    color: white;
-}
-
+/* Container to wrap content */
 .container {
     max-width: 1416px;
     min-width: 320px;
     margin: 0 auto;
     padding: 0 20px;
 }
-
+/* To hide the headings */
 .hidden_heading {
     display: none;
 }
-
+/* To add glassmorpism effect to some element */
 .glassmorphism {
     background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
 }
-
+/* To add bold font weight to some element */
 .bold {
     font-weight: 600;
 }
@@ -63,7 +58,7 @@ a {
 .header {
     padding: 20px 0;
 }
-
+/* Logo styles */
 .logo {
     display: contents;
     color: white;
@@ -74,7 +69,7 @@ a {
 .logo__img {
     width: 31px;
 }
-
+/* Styles for weather block */
 .weather {
     position: relative;
     max-width: 800px;
@@ -128,7 +123,7 @@ a {
 .search__button img {
     width: 22px;
 }
-
+/* Styles for errors and success alerts */
 .error {
     display: none;
     padding: 0.5rem;
@@ -161,7 +156,7 @@ a {
 .success {
     background: lightgreen;
 }
-
+/* Styles for current weather block */
 .current {
     margin: 28px 0 10px;
     padding: 15px;
@@ -203,7 +198,7 @@ a {
     margin-top: 10px;
     text-align: center;
 }
-
+/* Save and delete buttons */
 #save_location,
 .delete_location {
     content-visibility: hidden;
@@ -233,7 +228,7 @@ a {
     transform: scale(1.1);
     transition: transform 0.3s;
 }
-
+ /* Styles for hourly forecast */
 .hourly {
     margin: 10px 0 30px;
     padding: 15px;
@@ -257,7 +252,7 @@ a {
 .hour__icon {
     width: 50px;
 }
-
+/* Styles for details of current weather */
 .details__wrapper {
     display: flex;
     justify-content: space-between;
@@ -291,12 +286,12 @@ a {
 .details__wind {
     float: right;
 }
-
+/* Footer */
 .footer {
     height: 80px;
     /*position: relative;*/
 }
-
+/* Navigation menu */
 .navigation {
     display: flex;
     justify-content: space-evenly;
@@ -319,14 +314,10 @@ a {
     color: white;
 }
 
-/*.navigation__link a:hover {*/
-/*    */
-/*}*/
-
 .active a {
     color: black;
 }
-
+/* Styles for weather forecast */
 .forecast__icon {
     grid-area: 1 / 1 / 3 / 2;
 }
@@ -364,7 +355,7 @@ a {
     justify-items: center;
     grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr;
 }
-
+/* Styles for saved locations */
 .saved {
     position: relative;
     padding: 15px;
