@@ -155,6 +155,7 @@ a {
 
 .success {
     background: lightgreen;
+    z-index: 9;
 }
 /* Styles for current weather block */
 .current {
