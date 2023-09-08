@@ -39,7 +39,11 @@ const getCurrentWeather = (defaultLocation) => {
                 } else {
                     stopLoading();
 
-                    const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res;
+                    const {
+                        location: {name},
+                        current: {temp_c, humidity, wind_dir, wind_kph, condition: {text, icon}},
+                        forecast: {forecastday: {0: {astro: {sunrise, sunset}, hour}}}
+                    } = res;
 
                     mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour);
 
@@ -53,6 +57,7 @@ const getCurrentWeather = (defaultLocation) => {
                 }
             });
     } catch (error) {
+        stopLoading();
         showError(error.message);
         throw error;
     }
@@ -88,7 +93,7 @@ const showSuccess = (success) => {
  * Function helper to start loading from fetch request
  */
 const startLoading = () => {
-    let buttons = document.querySelectorAll('button');
+    const buttons = document.querySelectorAll('button');
 
     buttons.forEach(button => {
         button.disabled = true;
@@ -101,7 +106,7 @@ const startLoading = () => {
  * Function helper to stop loading from fetch request
  */
 const stopLoading = () => {
-    let buttons = document.querySelectorAll('button');
+    const buttons = document.querySelectorAll('button');
 
     buttons.forEach(button => {
         button.disabled = false;
@@ -112,7 +117,7 @@ const stopLoading = () => {
 };
 
 /**
- * Function to filter array of 24 hours data to array with only 5 hours
+ * Function to filter array of hours data to array with only 5 hours
  * @param hours
  * @returns {*[]}
  */
@@ -176,7 +181,7 @@ const convertTime = (time) => {
  * Function to save location to local storage
  */
 const saveLocation = () => {
-    let saveBtn = document.getElementById('save_location');
+    const saveBtn = document.getElementById('save_location');
     let saved = [];
     if (localStorage.getItem('saved')) {
         saved = JSON.parse(localStorage.getItem('saved'));
@@ -215,10 +220,10 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
     return `<h2 class="hidden_heading">Current day weather</h2>
 <!--            current weather section          -->
             <div class="current glassmorphism">
-                <button type="button" class="glassmorphism" id="save_location">+</button>
+                <button type="button" id="save_location">Save</button>
                 <h2 class="current__name">${name}</h2>
                 <div class="current__actual">
-                    <img class="current__icon" src="${icon}" alt="">
+                    <img class="current__icon" src="${icon}" alt="${condition} icon">
                     <span class="current__temp">${decimalRound(temp)}</span>
                 </div>
                 <div class="current__day">
@@ -229,27 +234,27 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
             <div class="hourly glassmorphism">
                 <div class="hour">
                     <p class="hour__time">${convertTime(splitDate(filteredHours[0].time))}</p>
-                    <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                    <img class="hour__icon" src="${filteredHours[0].condition.icon}" alt="${filteredHours[0].condition.text} icon">
                     <p>${decimalRound(filteredHours[0].temp_c)}℃</p>
                 </div>
                 <div class="hour">
                     <p class="hour__time">${convertTime(splitDate(filteredHours[1].time))}</p>
-                    <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                    <img class="hour__icon" src="${filteredHours[1].condition.icon}" alt="${filteredHours[1].condition.text} icon">
                     <p>${decimalRound(filteredHours[1].temp_c)}℃</p>
                 </div>
                 <div class="hour">
                     <p class="hour__time">${convertTime(splitDate(filteredHours[2].time))}</p>
-                    <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                    <img class="hour__icon" src="${filteredHours[2].condition.icon}" alt="${filteredHours[2].condition.text} icon">
                     <p>${decimalRound(filteredHours[2].temp_c)}℃</p>
                 </div>
                 <div class="hour">
                     <p class="hour__time">${convertTime(splitDate(filteredHours[3].time))}</p>
-                    <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                    <img class="hour__icon" src="${filteredHours[3].condition.icon}" alt="${filteredHours[3].condition.text} icon">
                     <p>${decimalRound(filteredHours[3].temp_c)}℃</p>
                 </div>
                 <div class="hour">
                     <p class="hour__time">${convertTime(splitDate(filteredHours[4].time))}</p>
-                    <img class="hour__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                    <img class="hour__icon" src="${filteredHours[4].condition.icon}" alt="${filteredHours[4].condition.text} icon">
                     <p>${decimalRound(filteredHours[4].temp_c)}℃</p>
                 </div>
             </div>
@@ -260,28 +265,28 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
                     <h3 class="details__name">Wind</h3>
                     <span class="details__wind">${wind_dir}</span>
                     <div class="details__box">
-                        <img class="details__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                        <img class="details__icon" src="assets/images/windy.svg" alt="Wind icon">
                         <p>${decimalRound(wind_kph)}km/h</p>
                     </div>
                 </div>
                 <div class="details glassmorphism">
                     <h3 class="details__name">Sunrise</h3>
                     <div class="details__box">
-                        <img class="details__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                        <img class="details__icon" src="assets/images/sunrise.svg" alt="Sunrise icon">
                         <p>${sunrise}</p>
                     </div>
                 </div>
                 <div class="details glassmorphism">
                     <h3 class="details__name">Humidity</h3>
                     <div class="details__box">
-                        <img class="details__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                        <img class="details__icon" src="assets/images/humidity.svg" alt="Humidity icon">
                         <p>${humidity}%</p>
                     </div>
                 </div>
                 <div class="details glassmorphism">
                     <h3 class="details__name">Sunset</h3>
                     <div class="details__box">
-                        <img class="details__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                        <img class="details__icon" src="assets/images/sunset.svg" alt="Sunset icon">
                         <p>${sunset}</p>
                     </div>
                 </div>
@@ -322,37 +327,42 @@ searchInput.addEventListener('keypress', (e) => {
 locationBtn.addEventListener('click', () => {
     startLoading();
 
-    if (confirm('We would like to get your current location. Do you agree with it?')) {
-        navigator.geolocation.getCurrentPosition(position => {
+    // if (confirm('We would like to get your current location. Do you agree with it?')) {
+    navigator.geolocation.getCurrentPosition(position => {
 
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
 
-            fetch(`https://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${lat},${lon}&days=3&aqi=no&alerts=no
+        fetch(`https://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${lat},${lon}&days=3&aqi=no&alerts=no
 `)
-                .then(res => res.json())
-                .then(res => {
-                    stopLoading();
+            .then(res => res.json())
+            .then(res => {
+                stopLoading();
 
-                    const {location:{name}, current:{temp_c, humidity, wind_dir, wind_kph, condition:{text, icon}}, forecast:{forecastday:{0:{astro:{sunrise, sunset}, hour}}}} = res;
-                    mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour);
-                    errorElement.style.display = 'none';
+                const {
+                    location: {name},
+                    current: {temp_c, humidity, wind_dir, wind_kph, condition: {text, icon}},
+                    forecast: {forecastday: {0: {astro: {sunrise, sunset}, hour}}}
+                } = res;
 
-                    storageLocation(name);
+                mainContent.innerHTML = renderCurrentWeather(name, temp_c, humidity, wind_dir, wind_kph, text, icon, sunrise, sunset, hour);
+                errorElement.style.display = 'none';
 
-                    saveLocation();
+                storageLocation(name);
 
-                })
-        }, (error) => {
-            showError(error.message);
+                saveLocation();
+            })
+    }, (error) => {
+        showError(error.message);
 
-            stopLoading();
-        });
-    } else {
-        showError('User denied confirm');
         stopLoading();
-    }
+    })
 });
+//     } else {
+//         showError('User denied confirm');
+//         stopLoading();
+//     }
+// });
 
 /**
  * Listener for DOMContentLoaded to get real data when the page is load
@@ -362,7 +372,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let locationName = localStorage.getItem('location');
 
         getCurrentWeather(locationName);
-
     } else {
         getCurrentWeather('Dublin');
     }

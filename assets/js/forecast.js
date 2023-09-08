@@ -67,7 +67,7 @@ const renderForecast = (name, forecastday) => {
     forecastday.forEach(day => {
         html += `<div class="forecast">
             <div class="forecast__day glassmorphism">
-                <img class="forecast__icon" src="assets/images/weather_clouds_black.svg" alt="">
+                <img class="forecast__icon" src="${day.day.condition.icon}" alt="${day.day.condition.text} icon">
                     <span class="forecast__date">${convertDate(day.date)}</span>
                     <p class="forecast__weather">${day.day.condition.text}</p>
                     <span class="forecast__temp">H: ${decimalRound(day.day.maxtemp_c)}℃  L: ${decimalRound(day.day.mintemp_c)}℃</span>

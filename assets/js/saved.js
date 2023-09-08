@@ -5,7 +5,8 @@ const mainContent = document.getElementById('main_content');
  * @returns {Promise<string>}
  */
 const getSaved = async () => {
-    let html = `<h2 class="hidden_heading">Saved Locations</h2>
+    let html = `<!-- Saved locations current weather -->
+                <h2 class="hidden_heading">Saved Locations</h2>
                     <div class="weather glassmorphism">`;
 
     if (localStorage.getItem('saved') && JSON.parse(localStorage.getItem('saved')).length !== 0) {
@@ -22,17 +23,20 @@ const getSaved = async () => {
 
                 console.log(data);
                 if (!data.hasOwnProperty('error')) {
-                    const { location: { name }, current: { temp_c, condition: { text } } } = data;
+                    const {
+                        location: {name},
+                        current: {temp_c, condition: {text, icon}}
+                    }  = data;
 
                     const itemId = `${index}`;
 
                     html += `<div id="${itemId}" class="saved glassmorphism">
-                        <button type="button" class="delete_location glassmorphism">-</button>
-                        <h3 class="saved__name">${name}</h3>
-                        <img src="assets/images/weather_clouds_black.svg" alt="">
-                        <span class="saved__temp">${temp_c}</span>
-                        <p>${text}</p>
-                    </div>`;
+                                <button type="button" class="delete_location"></button>
+                                <h3 class="saved__name">${name}</h3>
+                                <img src="${icon}" alt="${text} icon">
+                                <span class="saved__temp">${temp_c}</span>
+                                <p>${text}</p>
+                            </div>`;
                 }
             } catch (error) {
                 console.error(error);
