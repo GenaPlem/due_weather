@@ -1,5 +1,8 @@
 const mainContent = document.getElementById('main_content');
 
+/**
+ * Function to get data about forecast weather from API
+ */
 const getForecast = () => {
     let location = localStorage.getItem('location') || 'Dublin';
     try {
@@ -8,11 +11,11 @@ const getForecast = () => {
             .then(res => res.json())
             .then(res => {
                 console.log(res);
-                const {location:{name}, forecast:{forecastday}} = res
+                const {location:{name}, forecast:{forecastday}} = res;
 
-                mainContent.innerHTML = renderForecast(name, forecastday)
+                mainContent.innerHTML = renderForecast(name, forecastday);
                 // error.style.display = 'none'
-            })
+            });
     } catch (error) {
         mainContent.innerHTML = `<div class="error">Error: ${error.message}</div>`;
         throw error;
@@ -40,14 +43,24 @@ const convertDate = (date) => {
     return `${day} ${month}`;
 };
 
+/**
+ * Listener for get forecast data on DOMContentLoaded
+ */
 document.addEventListener('DOMContentLoaded', () => {
     getForecast();
 });
 
+/**
+ * Function to render forecast weather
+ * @param name
+ * @param forecastday
+ * @returns {string}
+ */
 const renderForecast = (name, forecastday) => {
-    let html = `<div class="weather glassmorphism">
+    let html = `<!-- Weather forecast -->
+                <div class="weather glassmorphism">
                     <h2 class="hidden_heading">Forecast weather</h2>
-                    <h3 class="forecast__name">${name}</h3>`
+                    <h3 class="forecast__name">${name}</h3>`;
 
     console.log(forecastday)
 
@@ -58,10 +71,10 @@ const renderForecast = (name, forecastday) => {
                     <span class="forecast__date">${convertDate(day.date)}</span>
                     <p class="forecast__weather">${day.day.condition.text}</p>
                     <span class="forecast__temp">H: ${decimalRound(day.day.maxtemp_c)}℃  L: ${decimalRound(day.day.mintemp_c)}℃</span>
-            </div>`
-    })
+            </div>`;
+    });
 
-    html += `</div>`
+    html += `</div>`;
 
-    return html
-}
+    return html;
+};

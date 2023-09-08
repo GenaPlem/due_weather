@@ -16,7 +16,7 @@ const getCurrentWeather = (defaultLocation) => {
 
     if (location.length < 3) {
         errorElement.style.display = 'inline-block';
-        return
+        return;
     }
 
     try {
@@ -51,12 +51,12 @@ const getCurrentWeather = (defaultLocation) => {
                     responseError.style.display = 'none';
 
                 }
-            })
+            });
     } catch (error) {
         showError(error.message);
         throw error;
     }
-}
+};
 
 /**
  * Function to show alert about some error
@@ -68,17 +68,21 @@ const showError = (error) => {
 
     setTimeout(() => {
         responseError.style.display = 'none';
-    }, 2000)
-}
+    }, 2000);
+};
 
+/**
+ * Function to show alert about success
+ * @param success
+ */
 const showSuccess = (success) => {
     successMessage.style.display = 'inline-block';
     successMessage.innerText = `Success: ${success}`;
 
     setTimeout(() => {
         successMessage.style.display = 'none';
-    }, 2000)
-}
+    }, 2000);
+};
 
 /**
  * Function helper to start loading from fetch request
@@ -88,10 +92,10 @@ const startLoading = () => {
 
     buttons.forEach(button => {
         button.disabled = true;
-    })
+    });
     main.style.opacity = '0.3';
     searchInput.disabled = true;
-}
+};
 
 /**
  * Function helper to stop loading from fetch request
@@ -101,11 +105,11 @@ const stopLoading = () => {
 
     buttons.forEach(button => {
         button.disabled = false;
-    })
+    });
 
     main.style.opacity = '1';
     searchInput.disabled = false;
-}
+};
 
 /**
  * Function to filter array of 24 hours data to array with only 5 hours
@@ -143,7 +147,7 @@ const filterHours = (hours) => {
     }
 
     return filteredHours
-}
+};
 
 /**
  * Function helper to convert date string to time
@@ -166,7 +170,7 @@ const convertTime = (time) => {
     } else {
         return `0${hours - 12} PM`
     }
-}
+};
 
 /**
  * Function to save location to local storage
@@ -189,7 +193,7 @@ const saveLocation = () => {
         }
         localStorage.setItem('saved', JSON.stringify(saved));
     });
-}
+};
 
 /**
  * Function helper to rounding all decimals to integer
@@ -204,11 +208,12 @@ const decimalRound = (decimal) => Math.round(decimal);
  * @returns rendered html
  */
 const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, condition, icon, sunrise, sunset, hours) => {
-    console.log(hours)
+    console.log(hours);
     let filteredHours = filterHours(hours);
-    console.log(filteredHours)
+    console.log(filteredHours);
 
     return `<h2 class="hidden_heading">Current day weather</h2>
+<!--            current weather section          -->
             <div class="current glassmorphism">
                 <button type="button" class="glassmorphism" id="save_location">+</button>
                 <h2 class="current__name">${name}</h2>
@@ -220,6 +225,7 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
                     <p>${condition}</p>
                 </div>
             </div>
+<!--            Hourly forecast           -->
             <div class="hourly glassmorphism">
                 <div class="hour">
                     <p class="hour__time">${convertTime(splitDate(filteredHours[0].time))}</p>
@@ -247,6 +253,7 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
                     <p>${decimalRound(filteredHours[4].temp_c)}℃</p>
                 </div>
             </div>
+<!--            Details of current weather            -->
             <div class="details__wrapper">
                 <h2 class="hidden_heading">Current weather details</h2>
                 <div class="details glassmorphism">
@@ -278,8 +285,8 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
                         <p>${sunset}</p>
                     </div>
                 </div>
-            </div>`
-}
+            </div>`;
+};
 
 /**
  * Function to save location name into local storage
@@ -288,10 +295,10 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
 const storageLocation = (locationName) => {
 
     if (locationName.length < 3) {
-        return
+        return;
     }
     localStorage.setItem('location', locationName);
-}
+};
 
 /**
  * Listener event for search button by click
@@ -307,7 +314,7 @@ searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         getCurrentWeather();
     }
-})
+});
 
 /**
  * Listener for render current weather by actual location
@@ -340,12 +347,12 @@ locationBtn.addEventListener('click', () => {
             showError(error.message);
 
             stopLoading();
-        })
+        });
     } else {
         showError('User denied confirm');
         stopLoading();
     }
-})
+});
 
 /**
  * Listener for DOMContentLoaded to get real data when the page is load
