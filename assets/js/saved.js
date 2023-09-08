@@ -31,7 +31,7 @@ const getSaved = async () => {
                     const itemId = `${index}`;
 
                     html += `<div id="${itemId}" class="saved glassmorphism">
-                                <button type="button" class="delete_location"></button>
+                                <button type="button" class="delete_location">Delete</button>
                                 <h3 class="saved__name">${name}</h3>
                                 <div class="saved__actual">
                                     <img class="saved__icon" src="${icon}" alt="${text} icon">
