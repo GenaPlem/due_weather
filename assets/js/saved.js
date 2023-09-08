@@ -42,7 +42,7 @@ const getSaved = async () => {
                 }
             } catch (error) {
                 console.error(error);
-                throw error
+                throw error;
             }
         });
         await Promise.all(fetchPromises);

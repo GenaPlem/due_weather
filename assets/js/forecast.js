@@ -20,7 +20,7 @@ const getForecast = () => {
         mainContent.innerHTML = `<div class="error">Error: ${error.message}</div>`;
         throw error;
     }
-}
+};
 
 /**
  * Function helper to rounding all decimals to integer
@@ -62,7 +62,7 @@ const renderForecast = (name, forecastDay) => {
                     <h2 class="hidden_heading">Forecast weather</h2>
                     <h3 class="forecast__name">${name}</h3>`;
 
-    console.log(forecastDay)
+    console.log(forecastDay);
 
     forecastDay.forEach(day => {
         html += `<div class="forecast">

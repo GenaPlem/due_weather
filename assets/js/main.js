@@ -151,7 +151,7 @@ const filterHours = (hours) => {
         }
     }
 
-    return filteredHours
+    return filteredHours;
 };
 
 /**
@@ -171,9 +171,9 @@ const convertTime = (time) => {
     const [hours] = time.split(':');
 
     if (hours <= 12) {
-        return `${hours} AM`
+        return `${hours} AM`;
     } else {
-        return `0${hours - 12} PM`
+        return `0${hours - 12} PM`;
     }
 };
 
@@ -351,12 +351,12 @@ locationBtn.addEventListener('click', () => {
                 storageLocation(name);
 
                 saveLocation();
-            })
+            });
     }, (error) => {
         showError(error.message);
 
         stopLoading();
-    })
+    });
 });
 //     } else {
 //         showError('User denied confirm');
