@@ -98,10 +98,13 @@ a {
     cursor: pointer;
 }
 
+.weather__location:hover,
+.weather__search:hover {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.35);
+}
+
 .weather__location:active,
-.weather__search:focus,
-#save_location:active,
-.delete_location {
+.weather__search:focus {
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -116,6 +119,10 @@ a {
     right: 18px;
     top: -2px;
     cursor: pointer;
+}
+
+.search__button img {
+    width: 22px;
 }
 
 .error {
@@ -144,6 +151,7 @@ a {
 
 .response__error {
     background: red;
+    z-index: 10;
 }
 
 .success {
@@ -166,6 +174,7 @@ a {
 .current__actual {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 .current__temp {
@@ -189,16 +198,32 @@ a {
 
 #save_location,
 .delete_location {
-    width: 40px;
-    height: 40px;
-    font-size: 25px;
+    content-visibility: hidden;
+    width: 20px;
+    height: 35px;
+    box-sizing: border-box;
     position: absolute;
     top: 10px;
     right: 10px;
-    color: black;
     border: none;
-    border-radius: 50%;
     cursor: pointer;
+}
+
+#save_location {
+    background: url("../images/saved.svg") center top / cover;
+    background-size: 40px;
+}
+
+.delete_location {
+    background: url("../images/trash.svg") center bottom / cover no-repeat;
+    background-size: 30px;
+    width: 27px;
+}
+
+#save_location:hover,
+.delete_location:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s;
 }
 
 .hourly {
@@ -212,6 +237,7 @@ a {
 .hour {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
 }
@@ -221,8 +247,7 @@ a {
 }
 
 .hour__icon {
-    width: 30px;
-    height: 19px;
+    width: 50px;
 }
 
 .details__wrapper {
@@ -240,18 +265,18 @@ a {
 }
 
 .details__name {
-    font-size: 14px;
     font-weight: 600;
     display: contents;
 }
 
 .details__icon {
-    width: 30px;
+    width: 45px;
 }
 
 .details__box {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     margin: 20px 0;
 }
 
