@@ -220,7 +220,7 @@ const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, conditio
     return `<h2 class="hidden_heading">Current day weather</h2>
 <!--            current weather section          -->
             <div class="current glassmorphism">
-                <button type="button" id="save_location">Save</button>
+                <button type="button" id="save_location" aria-label="Button to save current location to saved">Save</button>
                 <h2 class="current__name">${name}</h2>
                 <div class="current__actual">
                     <img class="current__icon" src="${icon}" alt="${condition} icon">
