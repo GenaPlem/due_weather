@@ -72,7 +72,7 @@ const renderForecast = (name, forecastDay) => {
                 <p class="forecast__weather">${day.day.condition.text}</p>
                 <p class="forecast__temp"><span class="bold">H:</span> ${decimalRound(day.day.maxtemp_c)}℃  <span class="bold">L:</span> ${decimalRound(day.day.mintemp_c)}℃</p>
                 <p class="forecast__rain"><span class="bold">Rain Chanse:</span> ${day.day.daily_chance_of_rain}%</p>
-                <div class="forecast__wind"><img src="assets/images/windy.svg" alt="Windy icon" width="25px">${day.day.maxwind_kph} km/h</div>
+                <div class="forecast__wind"><img src="assets/images/windy.svg" alt="Windy icon" width="25px">${decimalRound(day.day.maxwind_kph)} km/h</div>
             </div>`;
     });
 
