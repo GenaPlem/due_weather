@@ -85,6 +85,8 @@ a {
     padding: 13px 42px 13px 18px;
     border: none;
     border-radius: 15px;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .weather__location {
