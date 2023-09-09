@@ -132,7 +132,7 @@ To maintain a consistent and polished user interface, the default browser confir
 ### Colors
 
 * ***Primary Color: Blue (#16AFF0)*** <br>
-The primary color for DueWeather is a vibrant shade of blue, represented by the hex code #16AFF0. This color was carefully selected using the Anywhere Picker plugin in Figma, utilizing its color picker tool. The blue hue not only adds visual appeal but also aligns with the theme of weather, evoking feelings of clear skies and tranquility.
+The primary color for DueWeather is a vibrant shade of blue, represented by the hex code #16AFF0. This color was carefully selected using the Anywhere Picker plugin in Figma, utilizing its color picker tool. The blue hue not only adds visual appeal but also aligns with the theme of weather, evoking feelings of clear skies and tranquility. <br>
 ![Anywhere picker](README/images/design/anywhere_picker.png)
 
 
