@@ -327,7 +327,7 @@ searchInput.addEventListener('keypress', (e) => {
 locationBtn.addEventListener('click', () => {
     startLoading();
 
-    if (confirm('We would like to get your current location. Do you agree with it?')) {
+    if (confirm('Would you like to see the weather in your current location? Please allow us to access your geolocation data.')) {
     navigator.geolocation.getCurrentPosition(position => {
 
         const lat = position.coords.latitude;
