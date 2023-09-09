@@ -25,7 +25,6 @@ const getCurrentWeather = (defaultLocation) => {
 `)
             .then(res => res.json())
             .then(res => {
-                console.log(res);
                 /*
                     If response object has property error, then error will show up
                  */
@@ -53,7 +52,6 @@ const getCurrentWeather = (defaultLocation) => {
 
                     errorElement.style.display = 'none';
                     responseError.style.display = 'none';
-
                 }
             });
     } catch (error) {
@@ -188,7 +186,6 @@ const saveLocation = () => {
     }
 
     saveBtn.addEventListener('click', (e) => {
-        console.log(e.target.nextElementSibling.textContent);
         let locationName = e.target.nextElementSibling.textContent;
         if (!saved.includes(locationName)) {
             saved.push(locationName);
@@ -213,9 +210,7 @@ const decimalRound = (decimal) => Math.round(decimal);
  * @returns rendered html
  */
 const renderCurrentWeather = (name, temp, humidity, wind_dir, wind_kph, condition, icon, sunrise, sunset, hours) => {
-    console.log(hours);
     let filteredHours = filterHours(hours);
-    console.log(filteredHours);
 
     return `<h2 class="hidden_heading">Current day weather</h2>
 <!--            current weather section          -->

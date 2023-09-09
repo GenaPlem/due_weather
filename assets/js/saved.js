@@ -12,16 +12,13 @@ const getSaved = async () => {
     if (localStorage.getItem('saved') && JSON.parse(localStorage.getItem('saved')).length !== 0) {
 
         let saved = JSON.parse(localStorage.getItem('saved'));
-        console.log(saved);
 
         const fetchPromises = saved.map(async (location, index) => {
             try {
-                // startLoading();
                 let res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=b838b9836989433494d122402230109&q=${location}&days=3&aqi=no&alerts=no
 `);
                 let data = await res.json();
 
-                console.log(data);
                 if (!data.hasOwnProperty('error')) {
                     const {
                         location: {name},
@@ -41,7 +38,6 @@ const getSaved = async () => {
                             </div>`;
                 }
             } catch (error) {
-                console.error(error);
                 throw error;
             }
         });
@@ -85,16 +81,12 @@ const removeLocation = () => {
             let savedLocations = [];
             if (localStorage.getItem('saved')) {
                 savedLocations = JSON.parse(localStorage.getItem('saved'));
-                // console.log(savedLocations);
             }
-            // console.log(e.target.nextElementSibling.textContent);
-            // let locationName = e.target.nextElementSibling.textContent;
+
             let savedWeather = e.target.parentElement;
-            console.log(savedWeather.id);
 
             const itemId = savedWeather.id;
             let filterLocation = savedLocations.filter((saved, index) => index !== +itemId);
-            console.log(filterLocation);
 
             localStorage.setItem('saved', JSON.stringify(filterLocation));
             mainContent.innerHTML = await getSaved();

@@ -10,11 +10,9 @@ const getForecast = () => {
 `)
             .then(res => res.json())
             .then(res => {
-                console.log(res);
                 const {location:{name}, forecast:{forecastday}} = res;
 
                 mainContent.innerHTML = renderForecast(name, forecastday);
-                // error.style.display = 'none'
             });
     } catch (error) {
         mainContent.innerHTML = `<div class="error">Error: ${error.message}</div>`;
@@ -61,8 +59,6 @@ const renderForecast = (name, forecastDay) => {
                 <div class="weather glassmorphism">
                     <h2 class="hidden_heading">Forecast weather</h2>
                     <h3 class="forecast__name">${name}</h3>`;
-
-    console.log(forecastDay);
 
     forecastDay.forEach(day => {
         html += `<div class="forecast">
